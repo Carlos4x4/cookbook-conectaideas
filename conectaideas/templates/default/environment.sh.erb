@@ -1,4 +1,4 @@
 PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games"
-<% node[:conectaideas][:environment].keys.each do |key| %>
-<%= key %>=<%= node[:conectaideas][:environment][key] %> 
+<% node[:deploy][:conectaideas][:environment].keys.each do |key| %>
+<%= key %>=<%= node[:deploy][:conectaideas][:environment][key] %> 
 <% end %>
