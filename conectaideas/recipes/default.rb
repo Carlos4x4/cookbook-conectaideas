@@ -22,10 +22,10 @@ package "libxslt-dev"
 package "libmagickwand-dev"
 package "postgresql-client-9.3"
 
-# template "/etc/environment" do
-#   source "environment.sh.erb"
-#   mode 0555
-# end
+template "/etc/environment" do
+  source "environment.sh.erb"
+  mode 0555
+end
 # 
 # application 'conectaideas' do
 #     path node[:conectaideas][:path]
