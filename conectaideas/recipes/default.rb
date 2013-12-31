@@ -21,22 +21,35 @@ package "libxml2"
 package "libxslt-dev"
 package "libmagickwand-dev"
 package "postgresql-client-9.3"
+package "monit"
 
 template "/etc/environment" do
   source "environment.sh.erb"
   mode 0555
 end
-# 
-# application 'conectaideas' do
-#     path node[:conectaideas][:path]
-#     revision 'HEAD'
-#     repository node[:conectaideas][:scm]
-#     deploy_key node[:conectaideas][:key]
-#     rails do
-#       bundler true
-#       gems ['bundler']
-#     end
-#     unicorn do
-#       worker_processes 2
-#     end
-# end
+
+node[:deploy].each do |application, deploy|
+  template "/etc/monit/conf.d/sidekiq_#{application}.monitrc" do
+    owner 'root'
+    group 'root'
+    mode 0644
+    source "monitrc.conf.erb"
+    variables({
+      :worker_count => node[:sidekiq][:worker_count],
+      :app_name => application,
+      :deploy => deploy
+    })
+  end
+
+  execute "ensure-sidekiq-is-setup-with-monit" do
+    command %Q{
+      monit reload
+    }
+  end
+
+  execute "restart-sidekiq" do
+    command %Q{
+      echo "sleep 20 && monit -g sidekiq_#{application} restart all" | at now
+    }
+  end
+end
