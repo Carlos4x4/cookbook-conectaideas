@@ -7,6 +7,7 @@
 # All rights reserved - Do Not Redistribute
 #
 include_recipe 'apt'
+include_recipe 'cron'
 
 apt_repository "postgres" do
   uri "http://apt.postgresql.org/pub/repos/apt/"
@@ -55,17 +56,10 @@ node[:deploy].each do |application, deploy|
   end
 end
 
-deploy_to = node[:deploy][:conectaideas][:deploy_to]
-
-cron "cerrar sesiones de alerta activas" do
-  action :create
-  minute "*/10"
-  hour "*"
-  weekday "*"
-  user "deploy"
-  home "#{deploy_to}/current"
-  command %Q{
-    cd #{deploy_to}/current &&
-    bundle exec rake sagde:cerrar_sesiones_alerta_inactivas
-  }
+cron_d 'cerrar-sesiones-abiertas' do
+  minute  '*/10'
+  hour    '*'
+  command "cd #{node[:deploy][:conectaideas][:deploy_to]}/current && bundle exec rake sagde:cerrar_sesiones_alerta_inactivas"
+  user    'deploy'
 end
+
