@@ -54,13 +54,7 @@ end
 cron_d 'cerrar-sesiones-abiertas' do
   minute  '*/10'
   hour    '*'
-  command "cd #{node[:deploy][:conectaideas][:deploy_to]}/current && bundle exec rake sagde:cerrar_sesiones_alerta_inactivas"
+  command "source /etc/environment && cd #{node[:deploy][:conectaideas][:deploy_to]}/current && bundle exec rake sagde:cerrar_sesiones_alerta_inactivas"
   user    'deploy'
 end
 
-cron_d 'cerrar-sesiones-abiertas' do
-  minute  '*/10'
-  hour    '*'
-  command "cd #{node[:deploy][:conectaideas][:deploy_to]}/current && bundle exec rake sagde:cerrar_sesiones_alerta_inactivas"
-  user    'deploy'
-end
