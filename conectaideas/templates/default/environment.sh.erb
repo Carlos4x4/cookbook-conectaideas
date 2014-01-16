@@ -1,6 +1,6 @@
 PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games"
 <% node[:deploy][:conectaideas][:environment].keys.each do |key| %>
-<% unless node[:deploy][:conectaideas][:environment][key].nil? %>
+<% if !node[:deploy][:conectaideas][:environment][key].nil? and node[:deploy][:conectaideas][:environment][key].size > 2%>
 <%= key %>=<%= node[:deploy][:conectaideas][:environment][key] %>
 <% end %>
 <% end %>
