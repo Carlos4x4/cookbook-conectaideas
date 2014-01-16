@@ -25,6 +25,7 @@ package 'postgresql-client-9.3'
 package 'monit'
 package 'imagemagick'
 package 'wkhtmltopdf'
+package 'sendmail'
 
 template "/etc/environment" do
   source "environment.sh.erb"
