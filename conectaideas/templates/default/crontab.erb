@@ -1,6 +1,6 @@
 PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games"
 <% node[:deploy][:conectaideas][:environment].keys.each do |key| %>
-    <%= key %>=<%= node[:deploy][:conectaideas][:environment][key] %>
+<%= key %>=<%= node[:deploy][:conectaideas][:environment][key] %>
 <% end %>
 
 */10 * * * * deploy cd /srv/www/conectaideas/current && bundle exec rake sagde:cerrar_sesiones_alerta_inactivas
