@@ -51,10 +51,10 @@ execute 'restart-sidekiq' do
   command 'sleep 20 && monit -g sidekiq_conectaideas restart all | at now'
 end
 
-cron_d 'cerrar-sesiones-abiertas' do
-  minute  '*/10'
-  hour    '*'
-  command "source /etc/environment && cd #{node[:deploy][:conectaideas][:deploy_to]}/current && bundle exec rake sagde:cerrar_sesiones_alerta_inactivas"
-  user    'deploy'
+template '/etc/cron.d/cerrar-sesiones-abiertas' do
+  owner 'root'
+  group 'root'
+  mode 0644
+  source 'crontab.erb'
 end
 
