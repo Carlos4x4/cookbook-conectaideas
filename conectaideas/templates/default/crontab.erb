@@ -7,3 +7,4 @@ PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games"
 
 */10 * * * * deploy cd /srv/www/conectaideas/current && bundle exec rake sagde:cerrar_sesiones_alerta_inactivas
 0 4 * * * deploy cd /srv/www/conectaideas/current && bundle exec rake sagde:backup
+0 5 * * * deploy cd /srv/www/conectaideas/current && bundle exec rake sagde:diario
