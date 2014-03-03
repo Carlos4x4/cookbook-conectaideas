@@ -1,6 +1,0 @@
-[submodule "monit-tlq"]
-	path = monit-tlq
-	url = git@github.com:mabahamo/monit-tlq.git
-[submodule "monit_configs-tlq"]
-	path = monit_configs-tlq
-	url = git@github.com:mabahamo/monit_configs-tlq.git
