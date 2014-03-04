@@ -61,7 +61,7 @@ template '/etc/cron.d/cerrar-sesiones-abiertas' do
 end
 
 execute 'instalar loggly' do
-  command "wget -q -O - https://www.loggly.com/install/configure-syslog.py | sudo python - setup --auth #{node[:loggly][:auth]} --account #{node[:loggly][:account]}--yes"
+  command "wget -q -O - https://www.loggly.com/install/configure-syslog.py | sudo python - setup --auth #{node[:loggly][:auth]} --account #{node[:loggly][:account]} --yes"
   cwd '/tmp'
   creates '/etc/rsyslog.d/22-loggly.conf'  
 end
