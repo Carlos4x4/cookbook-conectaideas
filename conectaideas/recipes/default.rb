@@ -27,6 +27,7 @@ package 'imagemagick'
 package 'wkhtmltopdf'
 package 'sendmail'
 package 'mutt'
+package 'htop'
 
 template "/etc/environment" do
   source "environment.sh.erb"
