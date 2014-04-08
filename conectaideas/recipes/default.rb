@@ -20,7 +20,7 @@ apt_repository 'newrelic' do
   uri 'http://apt.newrelic.com/debian/'
   distribution 'newrelic'
   key 'https://download.newrelic.com/548C16BF.gpg'
-  componentes 'non-free'
+  components 'non-free'
 end
 
 package 'libpq-dev'
