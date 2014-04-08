@@ -16,6 +16,13 @@ apt_repository 'postgres' do
   components ['main']
 end
 
+apt_repository 'newrelic' do
+  uri 'http://apt.newrelic.com/debian/'
+  distribution 'newrelic'
+  key 'https://download.newrelic.com/548C16BF.gpg'
+  componentes 'non-free'
+end
+
 package 'libpq-dev'
 package 'git-core'
 package 'libxml2'
@@ -28,6 +35,7 @@ package 'wkhtmltopdf'
 package 'sendmail'
 package 'mutt'
 package 'htop'
+package 'newrelic-sysmond'
 
 template "/etc/environment" do
   source "environment.sh.erb"
@@ -61,9 +69,7 @@ template '/etc/cron.d/cerrar-sesiones-abiertas' do
   source 'crontab.erb'
 end
 
-execute 'instalar loggly' do
-  command "wget -q -O - https://www.loggly.com/install/configure-syslog.py | sudo python - setup --auth #{node[:loggly][:auth]} --account #{node[:loggly][:account]} --yes"
-  cwd '/tmp'
-  creates '/etc/rsyslog.d/22-loggly.conf'  
+execute 'config newrelic' do
+  command "nrsysmond-config --set license_key=#{node[:newrelic]}; /etc/init.d/newrelic-sysmond start"
 end
 
