@@ -1,0 +1,5 @@
+<% env.keys.each do |key| %>
+<% if !env[key].nil? and env[key].size > 2%>
+<%= key %>: <%= env[key] %>
+<% end %>
+<% end %>
