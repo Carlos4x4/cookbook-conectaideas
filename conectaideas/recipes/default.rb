@@ -79,6 +79,6 @@ node[:deploy].keys.each do |app|
     group 'deploy'
     mode 0750
     source 'application.yml.erb'
-    variables(:env => node[:deploy][app][:environment])
+    variables({:env => node[:deploy][app][:environment]})
   end
 end
