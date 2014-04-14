@@ -78,7 +78,7 @@ script 'create swapfile' do
   not_if { File.exists?('/var/swapfile') }
   code <<-eof
     mem_size=$(free -b | grep "Mem:" | awk '{print $2}') &&
-    sudo dd if=/dev/zero of=/var/swapfile bs=1M count=$((${mem_size}*2/1024/1024)) &&
+    sudo dd if=/dev/zero of=/var/swapfile bs=1M count=$((${mem_size}/1024/1024)) &&
     chmod 600 /var/swapfile &&
     mkswap /var/swapfile
   eof
