@@ -61,7 +61,7 @@ template '/etc/monit/conf.d/sidekiq_conectaideas_dev.monitrc' do
   source 'monitrc.conf.erb'
   variables({
                 :worker_count => 1,
-                :app_name => 'conectaideas',
+                :app_name => 'conectaideas_dev',
                 :deploy => node[:deploy][:conectaideas_dev]
             })
 end
