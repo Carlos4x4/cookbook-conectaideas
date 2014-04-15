@@ -48,10 +48,22 @@ template '/etc/monit/conf.d/sidekiq_conectaideas.monitrc' do
   mode 0644
   source 'monitrc.conf.erb'
   variables({
-    :worker_count => 1,
-    :app_name => 'conectaideas',
-    :deploy => node[:deploy][:conectaideas]
-  })
+                :worker_count => 1,
+                :app_name => 'conectaideas',
+                :deploy => node[:deploy][:conectaideas]
+            })
+end
+
+template '/etc/monit/conf.d/sidekiq_conectaideas_dev.monitrc' do
+  owner 'root'
+  group 'root'
+  mode 0644
+  source 'monitrc.conf.erb'
+  variables({
+                :worker_count => 1,
+                :app_name => 'conectaideas',
+                :deploy => node[:deploy][:conectaideas_dev]
+            })
 end
 
 execute 'ensure-sidekiq-is-setup-with-monit' do
