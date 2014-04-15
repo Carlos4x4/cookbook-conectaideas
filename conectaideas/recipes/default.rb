@@ -84,13 +84,13 @@ end
 #   eof
 # end
 
-mount '/dev/null' do  # swap file entry for fstab
-  action :enable  # cannot mount; only add to fstab
-  device '/var/swapfile'
-  fstype 'swap'
-end
-
-script 'activate swap' do
-  interpreter 'bash'
-  code 'swapon -a'
-end
+# mount '/dev/null' do  # swap file entry for fstab
+#   action :enable  # cannot mount; only add to fstab
+#   device '/var/swapfile'
+#   fstype 'swap'
+# end
+#
+# script 'activate swap' do
+#   interpreter 'bash'
+#   code 'swapon -a'
+# end
