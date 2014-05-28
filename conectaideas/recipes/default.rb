@@ -54,18 +54,6 @@ template '/etc/monit/conf.d/sidekiq_conectaideas.monitrc' do
             })
 end
 
-template '/etc/monit/conf.d/sidekiq_conectaideas_dev.monitrc' do
-  owner 'root'
-  group 'root'
-  mode 0644
-  source 'monitrc.conf.erb'
-  variables({
-                :worker_count => 1,
-                :app_name => 'conectaideas_dev',
-                :deploy => node[:deploy][:conectaideas_dev]
-            })
-end
-
 execute 'ensure-sidekiq-is-setup-with-monit' do
   command 'monit reload'
 end
@@ -81,9 +69,6 @@ template '/etc/cron.d/cerrar-sesiones-abiertas' do
   source 'crontab.erb'
 end
 
-execute 'config newrelic' do
-  command "nrsysmond-config --set license_key=#{node[:newrelic]}; /etc/init.d/newrelic-sysmond start"
-end
 
 # script 'create swapfile' do
 #   interpreter 'bash'
@@ -118,4 +103,9 @@ node[:deploy].keys.each do |app|
     source 'application.yml.erb'
     variables({:env => node[:deploy][app][:environment]})
   end
+end
+
+
+execute 'config newrelic' do
+  command "nrsysmond-config --set license_key=#{node[:newrelic]}; /etc/init.d/newrelic-sysmond start"
 end
