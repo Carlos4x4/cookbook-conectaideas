@@ -2,45 +2,10 @@
 # Cookbook Name:: conectaideas
 # Recipe:: default
 #
-# Copyright 2013, AutoMind
+# Copyright 2014, AutoMind
 #
 # All rights reserved - Do Not Redistribute
 #
-include_recipe 'apt'
-include_recipe 'cron'
-
-apt_repository 'postgres' do
-  uri 'http://apt.postgresql.org/pub/repos/apt/'
-  distribution 'precise-pgdg'
-  key 'https://www.postgresql.org/media/keys/ACCC4CF8.asc'
-  components ['main']
-end
-
-apt_repository 'newrelic' do
-  uri 'http://apt.newrelic.com/debian/'
-  distribution 'newrelic'
-  key 'https://download.newrelic.com/548C16BF.gpg'
-  components ['non-free']
-end
-
-package 'libpq-dev'
-package 'git-core'
-package 'libxml2'
-package 'libxslt-dev'
-package 'libmagickwand-dev'
-package 'postgresql-client-9.3'
-package 'monit'
-package 'imagemagick'
-package 'wkhtmltopdf'
-package 'sendmail'
-package 'mutt'
-package 'htop'
-package 'newrelic-sysmond'
-
-template "/etc/environment" do
-  source "environment.sh.erb"
-  mode 0555
-end
 
 template '/etc/monit/conf.d/sidekiq_conectaideas.monitrc' do
   owner 'root'
@@ -69,29 +34,6 @@ template '/etc/cron.d/cerrar-sesiones-abiertas' do
   source 'crontab.erb'
 end
 
-
-# script 'create swapfile' do
-#   interpreter 'bash'
-#   not_if { File.exists?('/var/swapfile') }
-#   code <<-eof
-#     mem_size=$(free -b | grep "Mem:" | awk '{print $2}') &&
-#     sudo dd if=/dev/zero of=/var/swapfile bs=1M count=$((${mem_size}/1024/1024)) &&
-#     chmod 600 /var/swapfile &&
-#     mkswap /var/swapfile
-#   eof
-# end
-
-# mount '/dev/null' do  # swap file entry for fstab
-#   action :enable  # cannot mount; only add to fstab
-#   device '/var/swapfile'
-#   fstype 'swap'
-# end
-#
-# script 'activate swap' do
-#   interpreter 'bash'
-#   code 'swapon -a'
-# end
-
 node[:deploy].keys.each do |app|
   execute 'mkdir' do
     command "mkdir -p #{node[:deploy][app][:deploy_to]}/shared/config/"
@@ -105,7 +47,6 @@ node[:deploy].keys.each do |app|
   end
 end
 
-
-execute 'config newrelic' do
-  command "nrsysmond-config --set license_key=#{node[:newrelic]}; /etc/init.d/newrelic-sysmond start"
-end
+#execute 'config newrelic' do
+#  command "nrsysmond-config --set license_key=#{node[:newrelic]}; /etc/init.d/newrelic-sysmond start"
+#end
