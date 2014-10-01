@@ -27,12 +27,12 @@ execute 'restart-sidekiq' do
   command 'sleep 20 && monit -g sidekiq_conectaideas restart all | at now'
 end
 
-template '/etc/cron.d/cerrar-sesiones-abiertas' do
-  owner 'root'
-  group 'root'
-  mode 0644
-  source 'crontab.erb'
-end
+#template '/etc/cron.d/cerrar-sesiones-abiertas' do
+#  owner 'root'
+#  group 'root'
+#  mode 0644
+#  source 'crontab.erb'
+#end
 
 node[:deploy].keys.each do |app|
   execute 'mkdir' do
@@ -40,7 +40,7 @@ node[:deploy].keys.each do |app|
   end
   template "#{node[:deploy][app][:deploy_to]}/shared/config/application.yml" do
     owner 'deploy'
-    group 'deploy'
+    group 'www-data'
     mode 0750
     source 'application.yml.erb'
     variables({:env => node[:deploy][app][:environment]})
