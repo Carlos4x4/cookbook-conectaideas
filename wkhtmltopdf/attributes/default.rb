@@ -6,7 +6,9 @@ end
 default['wkhtmltopdf']['install_dir'] = "/usr/local/bin"
 default['wkhtmltopdf']['mirror_url'] = "http://wkhtmltopdf.googlecode.com/files"
 #default['wkhtmltopdf']['version'] = '0.11.0_rc1'
-default['wkhtmltopdf']['version'] = '0.10.0_rc2'
+#default['wkhtmltopdf']['version'] = '0.10.0_rc2'
+default['wkhtmltopdf']['version'] = '0.12.2.1'
+
 
 # wkhtmltoimage
 default['wkhtmltopdf']['wkhtmltoimage']['binary_extracted_name'] = "wkhtmltoimage-#{node['wkhtmltopdf']['arch']}"
