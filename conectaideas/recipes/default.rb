@@ -31,11 +31,30 @@ package 'libmagickwand-dev'
 package 'postgresql-client-9.3'
 package 'monit'
 package 'imagemagick'
-package 'wkhtmltopdf'
+#package 'wkhtmltopdf'
 package 'sendmail'
 package 'mutt'
 package 'htop'
 package 'newrelic-sysmond'
+
+#dependencias wkthmltopdf 0.12
+package 'libfontenc1'
+package 'libxfont1'
+package 'xfonts-75dpi'
+package 'xfonts-base'
+package 'xfonts-encodings'
+package 'xfonts-utils'
+
+remote_file "/tmp/wkhtmltox-0.12.2.1_linux-trusty-amd64" do
+  source "http://downloads.sourceforge.net/project/wkhtmltopdf/0.12.2.1/wkhtmltox-0.12.2.1_linux-trusty-amd64.deb"
+  mode 0644
+  checksum "1cf47ab83a3352e7df95f2973061e8c90daabb1333f00e2385cb8b2b0ff22a90"
+end
+
+dpkg_package "wkthmltox" do
+  source "/tmp/wkhtmltox-0.12.2.1_linux-trusty-amd64"
+  action :install
+end
 
 template "/etc/environment" do
   source "environment.sh.erb"
