@@ -48,7 +48,6 @@ package 'xfonts-utils'
 
 remote_file "/tmp/wkhtmltox-0.12.2.1_linux-trusty-amd64.deb" do
   #source "http://downloads.sourceforge.net/project/wkhtmltopdf/0.12.2.1/wkhtmltox-0.12.2.1_linux-trusty-amd64.deb"
-  #source "http://download.gna.org/wkhtmltopdf/0.12/0.12.2.1/wkhtmltox-0.12.2.1.tar.bz2"
   source "http://download.gna.org/wkhtmltopdf/0.12/0.12.2.1/wkhtmltox-0.12.2.1_linux-trusty-amd64.deb"
   mode 0644
   checksum "1cf47ab83a3352e7df95f2973061e8c90daabb1333f00e2385cb8b2b0ff22a90"
