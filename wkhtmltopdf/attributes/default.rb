@@ -9,8 +9,8 @@ default['wkhtmltopdf']['install_dir'] = "/usr/local/bin"
 # default['wkhtmltopdf']['mirror_url'] = "https://downloads.wkhtmltopdf.org/obsolete/linux"
 default['wkhtmltopdf']['mirror_url'] = "https://cdn.conectaideas.com"
 #default['wkhtmltopdf']['mirror_url'] = "http://download.gna.org/wkhtmltopdf/0.12/0.12.2.1"
-default['wkhtmltopdf']['version'] = '0.11.0_rc1'
-# default['wkhtmltopdf']['version'] = '0.10.0_rc2'
+# default['wkhtmltopdf']['version'] = '0.11.0_rc1'
+default['wkhtmltopdf']['version'] = '0.10.0_rc2'
 
 # wkhtmltoimage
 default['wkhtmltopdf']['wkhtmltoimage']['binary_extracted_name'] = "wkhtmltoimage-#{node['wkhtmltopdf']['arch']}"
